@@ -38,7 +38,7 @@ function LoginPage({ onLogin }) {
             {error && <div className="error-message">{error}</div>}
             
             <button type="submit" className="login-button">
-              Enter Paradise ❤️
+              Enter gallery ❤️
             </button>
           </form>
           

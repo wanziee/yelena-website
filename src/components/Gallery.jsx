@@ -77,7 +77,7 @@ function Gallery() {
   return (
     <div className="gallery-container">
       <h2 className="gallery-title">🖼️ Yelena's Photo Gallery 🖼️</h2>
-      <p className="gallery-subtitle">Collection of beautiful moments with the one I love</p>
+      <p className="gallery-subtitle">hehe idk what to say</p>
       
       <div className="gallery-grid">
         {photos.map((photo) => (
