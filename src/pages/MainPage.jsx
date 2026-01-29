@@ -3,6 +3,7 @@ import './MainPage.css';
 import Gallery from '../components/Gallery';
 import MusicPlayer from '../components/MusicPlayer';
 import WaitingYelena from '../components/WaitingYelena';
+import Series from '../components/Series';
 
 function MainPage({ onLogout }) {
   const [activeTab, setActiveTab] = useState('gallery');
@@ -33,7 +34,13 @@ function MainPage({ onLogout }) {
           className={`nav-tab ${activeTab === 'waiting' ? 'active' : ''}`}
           onClick={() => setActiveTab('waiting')}
         >
-          🌸 Waiting Yelena
+          🌸 Whaiting Yelena
+        </button>
+        <button
+          className={`nav-tab ${activeTab === 'series' ? 'active' : ''}`}
+          onClick={() => setActiveTab('series')}
+        >
+          📺 Series
         </button>
       </nav>
 
@@ -41,6 +48,7 @@ function MainPage({ onLogout }) {
         {activeTab === 'gallery' && <Gallery />}
         {activeTab === 'music' && <MusicPlayer />}
         {activeTab === 'waiting' && <WaitingYelena />}
+        {activeTab === 'series' && <Series />}
       </main>
 
       <footer className="footer">
