@@ -186,7 +186,7 @@ setTimeout(() => {
 
                 <p className="mail-text">
                   Sooo, to celebrate our 3rd monthsary, i wanna ask you
-                  to watch a movie with me this weekend hehe. i was
+                  to watch a movie with me. i was
                   thinking maybe we could watch <i>Metamorphosis</i>{' '}
                   together, it’s a Korean horror movie and i feel
                   like it’d be way more fun watching it with you. 🎬👻
