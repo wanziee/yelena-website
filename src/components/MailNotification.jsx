@@ -156,7 +156,10 @@ function MailNotification() {
 
               <div className="mail-note">
                 <p className="note-text">
-                  baby if ure busy on those dates u can just tell me and we can choose another date hehe 
+                  baby if ure busy on those dates u can just tell me and we can choose another date hehe
+                </p>
+                <p className="note-text">
+                  btw sorry if its looking bad bcs im making this when im going home in a car rn hehe
                 </p>
               </div>
             </div>
