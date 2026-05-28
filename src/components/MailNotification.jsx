@@ -111,9 +111,7 @@ setTimeout(() => {
           onClick={handleMailClick}
           title="You have mail!"
         >
-          <div className="flower flower-1">🌸</div>
-          <div className="flower flower-2">🌼</div>
-          <div className="flower flower-3">🌷</div>
+
 
           <div className="mail-icon">
             <img

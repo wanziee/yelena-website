@@ -30,7 +30,7 @@ function MainPage({ onLogout }) {
           className={`nav-tab ${activeTab === 'music' ? 'active' : ''}`}
           onClick={() => setActiveTab('music')}
         >
-          🎵 Love Songs
+          🎵 Songs
         </button>
         {/* <button
           className={`nav-tab ${activeTab === 'waiting' ? 'active' : ''}`}
