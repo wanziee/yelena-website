@@ -118,7 +118,7 @@ function MailNotification() {
 </p>
 
 <p className="mail-text">
-  Sooo, to celebrate our 3rd monthsary, i wanna ask you out to watch a movie with me this weekend hehe. I was thinking maybe we could watch <i>Metamorphosis</i> together since it’s a Korean horror movie and I feel like it’d be way more fun watching it with you. 🎬👻
+  Sooo, to celebrate our 3rd monthsary, i wanna ask you to watch a movie with me this weekend hehe. I was thinking maybe we could watch <i>Metamorphosis</i> together since it’s a Korean horror movie and I feel like it’d be way more fun watching it with you. 🎬👻
 </p>
 
 
