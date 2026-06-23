@@ -4,14 +4,12 @@ import Gallery from '../components/Gallery';
 import MusicPlayer from '../components/MusicPlayer';
 import WaitingYelena from '../components/WaitingYelena';
 import Series from '../components/Series';
-import MailNotification from '../components/MailNotification';
 
 function MainPage({ onLogout }) {
   const [activeTab, setActiveTab] = useState('gallery');
 
   return (
     <div className="main-container">
-      <MailNotification />
       <header className="header">
         <h1 className="header-title">💕 Yelena's Memory 💕</h1>
         <button onClick={onLogout} className="logout-btn">

@@ -4,11 +4,11 @@ import './LoginPage.css';
 function LoginPage({ onLogin }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const correctPassword = '2005-07-05';
+  const correctPasswords = ['2005-07-05', '2006-07-10'];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === correctPassword) {
+    if (correctPasswords.includes(password)) {
       setError('');
       onLogin();
     } else {
@@ -42,7 +42,7 @@ function LoginPage({ onLogin }) {
             </button>
           </form>
           
-          <p className="hint">💡 Hint: Use zie's brithday (YYYY-MM-DD)</p>
+          <p className="hint">💡 Hint: ichwan's birthday or yelena's birthday</p>
         </div>
         
         <div className="background-animation">
