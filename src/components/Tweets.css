@@ -1,0 +1,272 @@
+.tweets-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tweets-title {
+  font-size: 2em;
+  color: #ff6b9d;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tweets-notice {
+  background: linear-gradient(135deg, #fff5f7 0%, #ffe6f0 100%);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  border-left: 4px solid #ff6b9d;
+  box-shadow: 0 2px 10px rgba(255, 107, 157, 0.1);
+}
+
+.tweets-notice p {
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+.tweet-form {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.tweet-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 1em;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.tweet-input:focus {
+  outline: none;
+  border-color: #ff6b9d;
+}
+
+.color-selector {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.color-label {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.color-option {
+  padding: 8px 20px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.color-option.zie:hover {
+  border-color: #4a90e2;
+  background: #e6f0ff;
+}
+
+.color-option.yelena:hover {
+  border-color: #ff6b9d;
+  background: #ffe6f0;
+}
+
+.color-option.zie.active {
+  border-color: #4a90e2;
+  background: #4a90e2;
+  color: white;
+}
+
+.color-option.yelena.active {
+  border-color: #ff6b9d;
+  background: #ff6b9d;
+  color: white;
+}
+
+.tweet-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.char-count {
+  color: #999;
+  font-size: 0.9em;
+}
+
+.tweet-button {
+  padding: 10px 25px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tweet-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+}
+
+.tweet-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tweets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tweet-card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease;
+}
+
+.tweet-card.pink {
+  background: linear-gradient(135deg, #ffe6f0 0%, #ffccd5 100%);
+  border-left: 4px solid #ff6b9d;
+}
+
+.tweet-card.blue {
+  background: linear-gradient(135deg, #e6f0ff 0%, #cce5ff 100%);
+  border-left: 4px solid #4a90e2;
+}
+
+.tweet-person {
+  font-weight: 700;
+  font-size: 0.9em;
+  margin-bottom: 8px;
+  color: #666;
+  text-transform: capitalize;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tweet-text {
+  color: #333;
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.tweet-date {
+  color: #999;
+  font-size: 0.85em;
+  text-align: right;
+}
+
+.loading,
+.no-tweets {
+  text-align: center;
+  color: #999;
+  padding: 40px;
+}
+
+@media (max-width: 768px) {
+  .tweets-container {
+    padding: 10px;
+  }
+
+  .tweets-title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  .tweets-notice {
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+  }
+
+  .tweets-notice p {
+    font-size: 0.85em;
+  }
+
+  .tweet-form {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .tweet-input {
+    font-size: 0.95em;
+    padding: 12px;
+  }
+
+  .color-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .color-label {
+    font-size: 0.85em;
+  }
+
+  .color-option {
+    padding: 6px 15px;
+    font-size: 0.85em;
+  }
+
+  .tweet-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .char-count {
+    text-align: left;
+  }
+
+  .tweet-button {
+    width: 100%;
+  }
+
+  .tweet-card {
+    padding: 15px;
+  }
+
+  .tweet-person {
+    font-size: 0.85em;
+  }
+
+  .tweet-text {
+    font-size: 0.95em;
+  }
+
+  .tweet-date {
+    font-size: 0.75em;
+  }
+}

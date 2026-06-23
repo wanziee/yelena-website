@@ -4,9 +4,10 @@ import Gallery from '../components/Gallery';
 import MusicPlayer from '../components/MusicPlayer';
 import WaitingYelena from '../components/WaitingYelena';
 import Series from '../components/Series';
+import Tweets from '../components/Tweets';
 
 function MainPage({ onLogout }) {
-  const [activeTab, setActiveTab] = useState('gallery');
+  const [activeTab, setActiveTab] = useState('tweets');
 
   return (
     <div className="main-container">
@@ -42,6 +43,12 @@ function MainPage({ onLogout }) {
         >
           📺 Series
         </button>
+        <button
+          className={`nav-tab ${activeTab === 'tweets' ? 'active' : ''}`}
+          onClick={() => setActiveTab('tweets')}
+        >
+          💬 Tweets
+        </button>
       </nav>
 
       <main className="content">
@@ -49,6 +56,7 @@ function MainPage({ onLogout }) {
         {activeTab === 'music' && <MusicPlayer />}
         {activeTab === 'waiting' && <WaitingYelena />}
         {activeTab === 'series' && <Series />}
+        {activeTab === 'tweets' && <Tweets />}
       </main>
 
       <footer className="footer">

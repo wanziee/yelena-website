@@ -90,20 +90,34 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px;
+  }
+
   .header-title {
-    font-size: 1.8em;
+    font-size: 1.3em;
+    margin-bottom: 0;
   }
 
   .logout-btn {
-    position: static;
-    margin-top: 15px;
+    display: none;
   }
 
   .nav-tabs {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 10px;
   }
 
   .nav-tab {
-    width: 100%;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
