@@ -110,6 +110,13 @@
   margin-top: 15px;
 }
 
+.format-hint {
+  font-size: 0.8em;
+  color: #bbb;
+  margin-top: 5px;
+  font-style: italic;
+}
+
 .background-animation {
   position: fixed;
   top: 0;

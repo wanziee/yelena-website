@@ -43,6 +43,7 @@ function LoginPage({ onLogin }) {
           </form>
           
           <p className="hint">💡 Hint: ichwan's birthday or yelena's birthday</p>
+          <p className="format-hint">Format: year-month-day (0000-00-00)</p>
         </div>
         
         <div className="background-animation">
