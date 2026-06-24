@@ -69,7 +69,7 @@ function Tweets() {
       <h2 className="tweets-title">💬 Tweets</h2>
       
       <div className="tweets-notice">
-        <p>I know we're not together anymore, but if you ever need someone to talk to or want to vent about anything, you can always come to me. You can let it all out here — only I'll see it.</p>
+        <p>We may not be together anymore, but if you ever need someone to talk to or vent to, you can always come to me. Whatever it is, you don’t have to carry it alone.</p>
       </div>
       
       <form onSubmit={handleSubmit} className="tweet-form">
@@ -100,7 +100,7 @@ function Tweets() {
         <div className="tweet-footer">
           <span className="char-count">{tweetText.length}/280</span>
           <button type="submit" className="tweet-button" disabled={!tweetText.trim()}>
-            Tweet 🐦
+            Tweet
           </button>
         </div>
       </form>
