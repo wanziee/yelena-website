@@ -151,6 +151,20 @@
   max-height: 220px;
 }
 
+.video-preview-wrapper {
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 260px;
+  border: 1px solid #f5d5df;
+}
+
+.video-preview {
+  width: 100%;
+  display: block;
+  max-height: 220px;
+}
+
 .tweet-footer {
   display: flex;
   justify-content: space-between;
@@ -241,6 +255,15 @@
   height: auto;
   max-height: 600px;
   object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tweet-video {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
   border-radius: 12px;
   margin-bottom: 10px;
   border: 1px solid rgba(0, 0, 0, 0.08);

@@ -9,6 +9,8 @@ function Tweets() {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videoPreview, setVideoPreview] = useState('');
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -36,28 +38,43 @@ function Tweets() {
     if (!file) {
       setSelectedImage(null);
       setImagePreview('');
+      setSelectedVideo(null);
+      setVideoPreview('');
       return;
     }
 
     const extension = file.name.split('.').pop()?.toLowerCase();
-    const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'];
+    const allowedImageExtensions = ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'];
+    const allowedVideoExtensions = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
     const isImageType = file.type.startsWith('image/');
+    const isVideoType = file.type.startsWith('video/');
     const isHeicExtension = ['heic', 'heif'].includes(extension);
 
-    if (!isImageType && !isHeicExtension) {
-      alert('Please choose a supported image file (jpg, png, webp, heic).');
+    if (isImageType || isHeicExtension) {
+      setSelectedImage(file);
+      setSelectedVideo(null);
+      setVideoPreview('');
+      const reader = new FileReader();
+      reader.onloadend = () => setImagePreview(reader.result);
+      reader.readAsDataURL(file);
+    } else if (isVideoType || allowedVideoExtensions.includes(extension)) {
+      setSelectedVideo(file);
+      setSelectedImage(null);
+      setImagePreview('');
+      const reader = new FileReader();
+      reader.onloadend = () => setVideoPreview(reader.result);
+      reader.readAsDataURL(file);
+    } else {
+      alert('Please choose a supported file (jpg, png, webp, heic, mp4, mov, avi, mkv, webm).');
       return;
     }
-
-    setSelectedImage(file);
-    const reader = new FileReader();
-    reader.onloadend = () => setImagePreview(reader.result);
-    reader.readAsDataURL(file);
   };
 
   const handleRemoveImage = () => {
     setSelectedImage(null);
     setImagePreview('');
+    setSelectedVideo(null);
+    setVideoPreview('');
   };
 
   const uploadImage = async (file) => {
@@ -80,14 +97,45 @@ function Tweets() {
     return publicUrlData?.publicUrl || null;
   };
 
+  const uploadVideo = async (file) => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+
+    console.log('Uploading video:', fileName, 'Size:', file.size, 'Type:', file.type);
+
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('tweets-images')
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: false,
+        contentType: file.type || 'video/mp4',
+      });
+
+    if (uploadError) {
+      console.error('Video upload error:', uploadError);
+      throw uploadError;
+    }
+
+    console.log('Video upload success:', uploadData);
+
+    const { data: publicUrlData } = supabase.storage
+      .from('tweets-images')
+      .getPublicUrl(uploadData?.path || fileName);
+
+    console.log('Public URL:', publicUrlData?.publicUrl);
+
+    return publicUrlData?.publicUrl || null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!tweetText.trim() && !selectedImage) return;
+    if (!tweetText.trim() && !selectedImage && !selectedVideo) return;
 
     try {
       setUploading(true);
       const color = selectedPerson === 'zie' ? 'blue' : 'pink';
       let imageUrl = null;
+      let videoUrl = null;
 
       if (selectedImage) {
         try {
@@ -97,11 +145,22 @@ function Tweets() {
         }
       }
 
+      if (selectedVideo) {
+        try {
+          videoUrl = await uploadVideo(selectedVideo);
+          console.log('Video URL obtained:', videoUrl);
+        } catch (uploadError) {
+          console.error('Video upload failed:', uploadError);
+          alert(`Video upload failed: ${uploadError.message || uploadError}. Posting text only.`);
+        }
+      }
+
       const insertPayload = {
         text: tweetText.trim(),
         color,
         person: selectedPerson,
         ...(imageUrl ? { image_url: imageUrl } : {}),
+        ...(videoUrl ? { video_url: videoUrl } : {}),
       };
 
       let { data, error } = await supabase
@@ -109,7 +168,7 @@ function Tweets() {
         .insert([insertPayload])
         .select();
 
-      if (error && imageUrl) {
+      if (error && (imageUrl || videoUrl)) {
         const fallbackPayload = {
           text: tweetText.trim(),
           color,
@@ -126,6 +185,8 @@ function Tweets() {
       setTweetText('');
       setSelectedImage(null);
       setImagePreview('');
+      setSelectedVideo(null);
+      setVideoPreview('');
       fetchTweets();
     } catch (error) {
       console.error('Error adding tweet:', error);
@@ -181,10 +242,10 @@ function Tweets() {
         />
         <div className="tweet-actions">
           <label className="image-upload-button">
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            <span>{selectedImage ? 'Change photo' : '📷 Add photo'}</span>
+            <input type="file" accept="image/*,video/*" onChange={handleImageChange} />
+            <span>{selectedImage || selectedVideo ? 'Change media' : '📷 Add photo/video'}</span>
           </label>
-          {selectedImage && (
+          {(selectedImage || selectedVideo) && (
             <button type="button" className="remove-image-button" onClick={handleRemoveImage}>
               Remove
             </button>
@@ -194,6 +255,11 @@ function Tweets() {
         {imagePreview && (
           <div className="image-preview-wrapper">
             <img src={imagePreview} alt="Preview" className="image-preview" />
+          </div>
+        )}
+        {videoPreview && (
+          <div className="video-preview-wrapper">
+            <video src={videoPreview} controls className="video-preview" />
           </div>
         )}
 
@@ -216,7 +282,7 @@ function Tweets() {
         </div>
         <div className="tweet-footer">
           <span className="char-count">{tweetText.length}/280</span>
-          <button type="submit" className="tweet-button" disabled={uploading || (!tweetText.trim() && !selectedImage)}>
+          <button type="submit" className="tweet-button" disabled={uploading || (!tweetText.trim() && !selectedImage && !selectedVideo)}>
             {uploading ? 'Posting...' : 'Tweet'}
           </button>
         </div>
@@ -234,6 +300,9 @@ function Tweets() {
               <p className="tweet-text">{tweet.text}</p>
               {tweet.image_url && (
                 <img src={tweet.image_url} alt="Tweet attachment" className="tweet-image" />
+              )}
+              {tweet.video_url && (
+                <video src={tweet.video_url} controls className="tweet-video" />
               )}
               <p className="tweet-date">
                 {formatDate(tweet.created_at)} · <span className="tweet-relative">{getRelativeTimeLabel(tweet.created_at)}</span>
