@@ -5,13 +5,24 @@ import MainPage from './pages/MainPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className="App">
       {!isLoggedIn ? (
-        <LoginPage onLogin={() => setIsLoggedIn(true)} />
+        <LoginPage onLogin={handleLogin} />
       ) : (
-        <MainPage onLogout={() => setIsLoggedIn(false)} />
+        <MainPage onLogout={handleLogout} currentUser={currentUser} />
       )}
     </div>
   );

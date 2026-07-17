@@ -1,19 +1,64 @@
 import React, { useState } from 'react';
+import { supabase } from '../supabaseConfig';
+import { detectDevice, getIPAddress, getCountryFromIP } from '../utils/deviceDetection';
 import './LoginPage.css';
 
 function LoginPage({ onLogin }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const correctPasswords = ['2005-07-05', '2006-07-10'];
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (correctPasswords.includes(password)) {
-      setError('');
-      onLogin();
-    } else {
-      setError('Who aree uuuuu?? r u even yelena? do u even know herr??  how do u know herr? ru her ex or somethng? go away u stinkiestttt hushh hushhhh 😤');
-      setPassword('');
+    setLoading(true);
+    setError('');
+
+    try {
+      // Check password against database
+      const { data: users, error: userError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('password_hash', password);
+
+      if (userError) throw userError;
+
+      if (users && users.length > 0) {
+        const user = users[0];
+        
+        // Get device info
+        const deviceInfo = detectDevice();
+        const ipAddress = await getIPAddress();
+        const country = await getCountryFromIP(ipAddress);
+
+        // Log login history
+        const { error: historyError } = await supabase
+          .from('login_history')
+          .insert({
+            user_id: user.id,
+            ip_address: ipAddress,
+            country: country,
+            device_type: deviceInfo.deviceType,
+            device_model: deviceInfo.deviceModel,
+            browser_name: deviceInfo.browserName,
+            os_name: deviceInfo.osName,
+            user_agent: deviceInfo.userAgent
+          });
+
+        if (historyError) {
+          console.error('Error logging login history:', historyError);
+        }
+
+        // Successful login
+        onLogin(user);
+      } else {
+        setError('Who aree uuuuu?? r u even yelena? do u even know herr??  how do u know herr? ru her ex or somethng? go away u stinkiestttt hushh hushhhh 😤');
+        setPassword('');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,8 +82,8 @@ function LoginPage({ onLogin }) {
             
             {error && <div className="error-message">{error}</div>}
             
-            <button type="submit" className="login-button">
-              Enter gallery ❤️
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? 'Logging in...' : 'Enter gallery ❤️'}
             </button>
           </form>
           

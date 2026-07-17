@@ -6,7 +6,7 @@ import WaitingYelena from '../components/WaitingYelena';
 import Series from '../components/Series';
 import Tweets from '../components/Tweets';
 
-function MainPage({ onLogout }) {
+function MainPage({ onLogout, currentUser }) {
   const [activeTab, setActiveTab] = useState('tweets');
 
   return (
