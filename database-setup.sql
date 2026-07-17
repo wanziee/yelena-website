@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS login_history (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  username VARCHAR(50),
   login_time TIMESTAMP DEFAULT NOW(),
   ip_address VARCHAR(50),
   country VARCHAR(100),

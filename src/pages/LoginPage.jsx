@@ -35,6 +35,7 @@ function LoginPage({ onLogin }) {
           .from('login_history')
           .insert({
             user_id: user.id,
+            username: user.username,
             ip_address: ipAddress,
             country: country,
             device_type: deviceInfo.deviceType,

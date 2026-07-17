@@ -19,11 +19,17 @@ export const detectDevice = () => {
   
   // OS detection
   let osName = 'Unknown';
-  if (userAgent.includes('Windows')) osName = 'Windows';
-  else if (userAgent.includes('Mac')) osName = 'macOS';
-  else if (userAgent.includes('Linux')) osName = 'Linux';
-  else if (userAgent.includes('Android')) osName = 'Android';
-  else if (userAgent.includes('iOS')) osName = 'iOS';
+  if (userAgent.includes('iPhone') || userAgent.includes('iPad') || userAgent.includes('iPod')) {
+    osName = 'iOS';
+  } else if (userAgent.includes('Mac') && !userAgent.includes('iPhone') && !userAgent.includes('iPad')) {
+    osName = 'macOS';
+  } else if (userAgent.includes('Windows')) {
+    osName = 'Windows';
+  } else if (userAgent.includes('Linux')) {
+    osName = 'Linux';
+  } else if (userAgent.includes('Android')) {
+    osName = 'Android';
+  }
   
   // Device model detection
   let deviceModel = 'Unknown';
