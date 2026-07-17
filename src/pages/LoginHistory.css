@@ -1,0 +1,195 @@
+.login-history-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-history-header {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-history-title {
+  font-size: 1.8em;
+  color: #667eea;
+  margin: 0;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+}
+
+.login-history-controls {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-section label {
+  color: #666;
+  font-weight: 600;
+}
+
+.filter-select {
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.refresh-btn {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: #5568d3;
+}
+
+.login-history-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  color: white;
+  font-size: 1.2em;
+  padding: 40px;
+}
+
+.login-history-table-container {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.login-history-table thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.login-history-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-history-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s ease;
+}
+
+.login-history-table tbody tr:hover {
+  background: #f8f9ff;
+}
+
+.login-history-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.login-history-table td {
+  padding: 15px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.username-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85em;
+  display: inline-block;
+}
+
+.device-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.device-icon {
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .login-history-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .login-history-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .login-history-table-container {
+    overflow-x: auto;
+  }
+
+  .login-history-table {
+    min-width: 800px;
+  }
+
+  .login-history-table th,
+  .login-history-table td {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+}

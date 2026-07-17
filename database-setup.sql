@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS login_history (
 -- For now, using plain text for simplicity - should be hashed in production
 INSERT INTO users (username, password_hash) VALUES 
 ('yelena', '2006-07-10'),
-('zie', '2005-07-05')
+('zie', '2005-07-05'),
+('admin', 'ichwan400')
 ON CONFLICT (username) DO NOTHING;
 
 -- Enable RLS
